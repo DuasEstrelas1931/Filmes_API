@@ -108,3 +108,9 @@ C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\tr\Micr
 C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\obj\Debug\net10.0\FilmesApi1.sourcelink.json
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\AutoMapper.dll
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\014.449880\source\repos\FilmesApi1\FilmesApi1\bin\Debug\net10.0\Microsoft.IdentityModel.Tokens.dll
