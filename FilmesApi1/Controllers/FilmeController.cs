@@ -1,5 +1,7 @@
-﻿using FilmesApi1.Models;
+﻿using FilmesApi1.Data;
+using FilmesApi1.Models;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace FilmesApi1.Controllers;
 
@@ -7,33 +9,33 @@ namespace FilmesApi1.Controllers;
 [Route("[controller]")]
 public class FilmeController : ControllerBase
 {
-    private static List<Filme> filmes = new List<Filme>();
-    private static int id = 0;
+    private FilmeContext _context;
+    public FilmeController(FilmeContext context)
+    {
+        _context = context;
+    }
+
 
     // POST /filme - Adicionar um novo filme
     [HttpPost]
     public IActionResult AdcionarFilme([FromBody] Filme filme)
     {
-        filme.Id = id++;
-        filmes.Add(filme);
-
-        Console.WriteLine(filme.Titulo);
-        Console.WriteLine(filme.Genero);
-        Console.WriteLine(filme.Duracao);
+        _context.Filmes.Add(filme);
+        _context.SaveChanges();
 
         return CreatedAtAction(nameof(ObterFilmesId), new { id = filme.Id }, filme);
     }
     // GET /filme - Obter a lista de filmes
     [HttpGet]
-    public IActionResult ObterFilmes()
+    public IActionResult ObterFilmes([FromQuery] int skip = 0, [FromQuery] int take = 10 )
     {
-        return Ok(filmes);
+        return Ok(_context.Filmes.Skip(skip).Take(take));
     }
     // GET /filme/{id} - Obter um filme por ID
     [HttpGet("{id}")]
     public IActionResult ObterFilmesId(int id)
     {
-        var filme = filmes.FirstOrDefault(filme => filme.Id == id);
+        var filme = _context.Filmes.FirstOrDefault(filme => filme.Id == id);
         if (filme == null)
         {
             return NotFound();
@@ -44,7 +46,7 @@ public class FilmeController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult AtualizarFilme(int id, [FromBody] Filme filmeAtualizado)
     {
-        var filme = filmes.FirstOrDefault(f => f.Id == id);
+        var filme = _context.Filmes.FirstOrDefault(f => f.Id == id);
         if (filme == null)
         {
             return NotFound();
@@ -54,19 +56,23 @@ public class FilmeController : ControllerBase
         filme.Genero = filmeAtualizado.Genero;
         filme.Duracao = filmeAtualizado.Duracao;
 
+        _context.Update(filme);
+        _context.SaveChanges();
+
         return NoContent();
     }
     // DELETE /filme/{id} - Excluir um filme por ID
     [HttpDelete("{id}")]
     public IActionResult ExcluirFilme(int id)
     {
-        var filme = filmes.FirstOrDefault(f => f.Id == id);
+        var filme = _context.Filmes.FirstOrDefault(f => f.Id == id);
         if (filme == null)
         {
             return NotFound(id);
         }
 
-        filmes.Remove(filme);
+        _context.Filmes.Remove(filme);
+        _context.SaveChanges();
 
         return NoContent();
     }
